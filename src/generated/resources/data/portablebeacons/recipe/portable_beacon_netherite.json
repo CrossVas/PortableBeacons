@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:storage_blocks/netherite"
+  },
+  "base": {
+    "item": "portablebeacons:portable_beacon_diamond"
+  },
+  "result": {
+    "count": 1,
+    "id": "portablebeacons:portable_beacon_netherite"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:storage_blocks/lapis"
+  },
+  "base": {
+    "item": "portablebeacons:portable_beacon_emerald"
+  },
+  "result": {
+    "count": 1,
+    "id": "portablebeacons:portable_beacon_emerald_ii"
+  },
+  "template": {
+    "tag": "minecraft:armor_trims"
+  }
+}

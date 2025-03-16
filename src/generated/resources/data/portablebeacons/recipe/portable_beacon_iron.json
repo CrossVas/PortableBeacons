@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "S": {
+      "item": "portablebeacons:beacon_shell"
+    }
+  },
+  "pattern": [
+    " S ",
+    " B ",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "portablebeacons:portable_beacon_iron"
+  }
+}

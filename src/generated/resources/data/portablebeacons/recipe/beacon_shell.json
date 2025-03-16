@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "G G",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "portablebeacons:beacon_shell"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "portablebeacons.configuration.common": "Portable Beacon Settings",
+  "portablebeacons.configuration.common.tooltip": "Common Settings",
+
+  "portablebeacons.configuration.toggleable": "Toggleable",
+  "portablebeacons.configuration.range": "Effect Range",
+  "portablebeacons.configuration.cost": "Cost",
+  "portablebeacons.configuration.x": "X",
+
+  "portablebeacons.configuration.toggleable.tooltip": "Portable Beacons can be Toggled ON/OFF when the player uses the beacon in hand.\nIf false the beacon will ALWAYS be active.",
+  "portablebeacons.configuration.x.tooltip": "Apply Cost every X Seconds",
+  "portablebeacons.configuration.costs.tooltip": "Experience Cost to Maintain Buffs.\nSet to 0 for no costs.",
+  "portablebeacons.configuration.range.tooltip": "Portable Beacons can affect all nearby Players.\nPlayers within the Effect Range will also gain the Portable Beacons Effect.\nIf Effect Range is set to 0 the Beacon will ONLY affect the player using it",
+
+  "itemGroup.portablebeacons": "Portable Beacons",
+  "item.portablebeacons.beacon_shell": "Portable Beacon Case",
+
+  "item.portablebeacons.portable_beacon_iron": "Iron Portable Beacon",
+  "item.portablebeacons.portable_beacon_gold": "Gold Portable Beacon",
+  "item.portablebeacons.portable_beacon_emerald": "Emerald Portable Beacon",
+  "item.portablebeacons.portable_beacon_diamond": "Diamond Portable Beacon",
+  "item.portablebeacons.portable_beacon_netherite": "Netherite Portable Beacon",
+
+  "item.portablebeacons.portable_beacon_iron_ii": "Iron Portable Beacon (II)",
+  "item.portablebeacons.portable_beacon_gold_ii": "Gold Portable Beacon (II)",
+  "item.portablebeacons.portable_beacon_emerald_ii": "Emerald Portable Beacon (II)",
+  "item.portablebeacons.portable_beacon_diamond_ii": "Diamond Portable Beacon (II)",
+  "item.portablebeacons.portable_beacon_netherite_ii": "Netherite Portable Beacon (II)",
+
+  "tooltip.portablebeacons.desc.main": "Provides Beacon Effects while in inventory",
+  "tooltip.portablebeacons.upgrade": "Use Smithing Table to upgrade. This will increase its power",
+  "tooltip.portablebeacons.immunetofire": "Immune to fire!",
+
+  "tooltip.portablebeacons.range": "Range: %s blocks",
+  "tooltip.portablebeacons.mode": "Status: %s",
+  "tooltip.portablebeacons.mode.on": "On",
+  "tooltip.portablebeacons.mode.off": "Off",
+  "tooltip.portablebeacons.toggle": "Right Click to toggle",
+  "tooltip.portablebeacons.sneak_info": "Hold %s for more info",
+  "tooltip.portablebeacons.sneak_info.desc": "Sneak",
+  "tooltip.portablebeacons.provides": "Provides:",
+
+  "tooltip.portablebeacons.shell": "Portable Beacon Base"
+}

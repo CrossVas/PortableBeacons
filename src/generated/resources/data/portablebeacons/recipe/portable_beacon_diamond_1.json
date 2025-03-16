@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "tag": "c:storage_blocks/diamond"
+    },
+    "S": {
+      "item": "portablebeacons:portable_beacon_emerald_ii"
+    }
+  },
+  "pattern": [
+    " S ",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "portablebeacons:portable_beacon_diamond"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "portablebeacons:item/portable_beacon_netherite"
+  }
+}
