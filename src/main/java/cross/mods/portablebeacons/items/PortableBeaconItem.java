@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PortableBeaconItem extends Item {
 
@@ -86,8 +87,7 @@ public class PortableBeaconItem extends Item {
     }
 
     public void toggle(ItemStack stack, Player player) {
-        CompoundTag tag = getNBTData(stack);
-        saveStatusData(stack, !tag.getBoolean(ENABLED_TAG));
+        updateNBTData(stack, compoundTag -> compoundTag.putBoolean(ENABLED_TAG, !compoundTag.getBoolean(ENABLED_TAG)));
         boolean active = isToggledOn(stack);
         if (active) {
             player.displayClientMessage(Component.translatable("tooltip.portablebeacons.mode", Component.translatable("tooltip.portablebeacons.mode.on").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GOLD), false);
@@ -97,7 +97,7 @@ public class PortableBeaconItem extends Item {
     }
 
     private void toggleOn(ItemStack stack) {
-        saveStatusData(stack, true);
+        updateNBTData(stack, compoundTag -> compoundTag.putBoolean(ENABLED_TAG, true));
     }
 
     private boolean isToggledOn(ItemStack stack) {
@@ -123,11 +123,11 @@ public class PortableBeaconItem extends Item {
     }
 
     private void tickTimer(ItemStack stack) {
-        saveTimerData(stack, getTimer(stack) + 1);
+        updateNBTData(stack, compoundTag -> compoundTag.putInt(TIMER_TAG, getTimer(stack) + 1));
     }
 
     private void resetTimer(ItemStack stack) {
-        saveTimerData(stack, 0);
+        updateNBTData(stack, compoundTag -> compoundTag.putInt(TIMER_TAG, 0));
     }
 
     @Override
@@ -173,21 +173,14 @@ public class PortableBeaconItem extends Item {
     }
 
     public CompoundTag getNBTData(ItemStack stack) {
-        if (stack.has(PortableComponentData.CUSTOM_NBT)) {
-            return stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
-        }
-        return new CompoundTag();
+        return stack.has(PortableComponentData.CUSTOM_NBT)
+                ? stack.get(PortableComponentData.CUSTOM_NBT).copyTag()
+                : new CompoundTag();
     }
 
-    public void saveTimerData(ItemStack stack, int timer) {
+    public void updateNBTData(ItemStack stack, Consumer<CompoundTag> updater) {
         CompoundTag tag = getNBTData(stack);
-        tag.putInt(TIMER_TAG, timer);
-        stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(tag));
-    }
-
-    public void saveStatusData(ItemStack stack, boolean status) {
-        CompoundTag tag = getNBTData(stack);
-        tag.putBoolean(ENABLED_TAG, status);
+        updater.accept(tag);
         stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(tag));
     }
 
