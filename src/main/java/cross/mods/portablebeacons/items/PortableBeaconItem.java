@@ -190,16 +190,14 @@ public class PortableBeaconItem extends Item {
     }
 
     public void saveNBTData(ItemStack stack, String tagName, CompoundTag tag) {
-        if (stack.has(PortableComponentData.CUSTOM_NBT)) {
-            CompoundTag internalTag = stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
-            internalTag.put(tagName, tag);
-            stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag)); // is it right?
-        } else {
-            CompoundTag internalTag = new CompoundTag();
-            internalTag.put(tagName, tag);
-            stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag)); // no idea
-        }
+        CompoundTag internalTag = stack.has(PortableComponentData.CUSTOM_NBT)
+                ? stack.get(PortableComponentData.CUSTOM_NBT).copyTag()
+                : new CompoundTag();
+
+        internalTag.put(tagName, tag);
+        stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag));
     }
+
 
     public enum Tiers {
         IRON(ChatFormatting.WHITE, 1, MobEffects.REGENERATION, MobEffects.MOVEMENT_SPEED),
