@@ -3,6 +3,7 @@ package cross.mods.portablebeacons.items;
 import cross.mods.portablebeacons.PortableBeacons;
 import cross.mods.portablebeacons.init.PortableComponentData;
 import cross.mods.portablebeacons.utils.EffectsHelper;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
@@ -157,12 +158,10 @@ public class PortableBeaconItem extends Item {
             list.add(Component.translatable("tooltip.portablebeacons.sneak_info", Component.translatable("tooltip.portablebeacons.sneak_info.desc").withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY));
             list.add(Component.translatable("tooltip.portablebeacons.provides").withStyle(ChatFormatting.YELLOW));
 
-            int amp = this.TIER.amp() - 1;
-            List<Holder<MobEffect>> effects = this.TIER.effects();
-            for (Holder<MobEffect> effect : effects) {
-                MobEffectInstance effectInstance = new MobEffectInstance(effect, 1, amp, false, true, true);
-                int level = effectInstance.getAmplifier();
-                list.add(effectInstance.getEffect().value().getDisplayName().copy().append(" ").append(Component.translatable("enchantment.level." + (level + 1))));
+            List<MobEffectInstance> effects = this.TIER.effects();
+            for (MobEffectInstance effect : effects) {
+                int level = effect.getAmplifier();
+                list.add(effect.getEffect().value().getDisplayName().copy().append(" ").append(Component.translatable("enchantment.level." + (level + 1))));
             }
         }
         super.appendHoverText(stack, context, list, tooltipFlag);
@@ -183,6 +182,7 @@ public class PortableBeaconItem extends Item {
         final List<Holder<MobEffect>> EFFECTS;
         final int AMPLIFICATION;
         final ChatFormatting STYLE;
+        final List<MobEffectInstance> EFFECTS_LIST;
 
         Tiers(int amplification, Tiers baseTier, Holder<MobEffect>... additionalEffects) {
             this(baseTier.style(), amplification, combineEffects(baseTier.EFFECTS, additionalEffects));
@@ -196,6 +196,11 @@ public class PortableBeaconItem extends Item {
             this.EFFECTS = List.of(effects);
             this.AMPLIFICATION = amplification;
             this.STYLE = style;
+            this.EFFECTS_LIST = new ObjectArrayList<>();
+            for (Holder<MobEffect> effect : effects) {
+                MobEffectInstance instance = new MobEffectInstance(effect, 1, amplification - 1, false, true, true);
+                this.EFFECTS_LIST.add(instance);
+            }
         }
 
         private static Holder<MobEffect>[] combineEffects(List<Holder<MobEffect>> baseEffects, Holder<MobEffect>[] additionalEffects) {
@@ -208,8 +213,8 @@ public class PortableBeaconItem extends Item {
             return this.AMPLIFICATION;
         }
 
-        public List<Holder<MobEffect>> effects() {
-            return this.EFFECTS;
+        public List<MobEffectInstance> effects() {
+            return this.EFFECTS_LIST;
         }
 
         public ChatFormatting style() {

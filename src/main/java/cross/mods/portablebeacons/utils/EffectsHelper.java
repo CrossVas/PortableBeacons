@@ -2,8 +2,6 @@ package cross.mods.portablebeacons.utils;
 
 import cross.mods.portablebeacons.PortableBeacons;
 import cross.mods.portablebeacons.items.PortableBeaconItem;
-import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -15,10 +13,10 @@ public class EffectsHelper {
     public static final int duration = PortableBeacons.CONFIG.costTimer.get() * 20 + 20;
 
     public static void applyEffects(Player player, PortableBeaconItem.Tiers tier) {
-        int amp = tier.amp() - 1;
-        List<Holder<MobEffect>> effects = tier.effects();
-        for (Holder<MobEffect> effect : effects) {
-            player.addEffect(new MobEffectInstance(effect, duration, amp, false, true, true));
+        List<MobEffectInstance> effects = tier.effects();
+        for (MobEffectInstance effect : effects) {
+            MobEffectInstance freshEffect = new MobEffectInstance(effect.getEffect(), duration, effect.getAmplifier(), false, true, true);
+            player.addEffect(freshEffect);
         }
     }
 
