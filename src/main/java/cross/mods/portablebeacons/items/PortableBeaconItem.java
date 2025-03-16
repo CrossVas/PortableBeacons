@@ -86,10 +86,9 @@ public class PortableBeaconItem extends Item {
     }
 
     public void toggle(ItemStack stack, Player player) {
-        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
-        tag.putBoolean(ENABLED_TAG, !tag.getBoolean(ENABLED_TAG));
-        saveNBTData(stack, ENABLED_TAG, tag);
-        boolean active = tag.getBoolean(ENABLED_TAG);
+        CompoundTag tag = getNBTData(stack);
+        saveStatusData(stack, !tag.getBoolean(ENABLED_TAG));
+        boolean active = isToggledOn(stack);
         if (active) {
             player.displayClientMessage(Component.translatable("tooltip.portablebeacons.mode", Component.translatable("tooltip.portablebeacons.mode.on").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GOLD), false);
         } else {
@@ -98,13 +97,11 @@ public class PortableBeaconItem extends Item {
     }
 
     private void toggleOn(ItemStack stack) {
-        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
-        tag.putBoolean(ENABLED_TAG, true);
-        saveNBTData(stack, ENABLED_TAG, tag);
+        saveStatusData(stack, true);
     }
 
     private boolean isToggledOn(ItemStack stack) {
-        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
+        CompoundTag tag = getNBTData(stack);
         return tag.getBoolean(ENABLED_TAG);
     }
 
@@ -121,20 +118,16 @@ public class PortableBeaconItem extends Item {
     }
 
     private int getTimer(ItemStack stack) {
-        CompoundTag tag = getNBTData(stack, TIMER_TAG);
+        CompoundTag tag = getNBTData(stack);
         return tag.getInt(TIMER_TAG);
     }
 
     private void tickTimer(ItemStack stack) {
-        CompoundTag tag = getNBTData(stack, TIMER_TAG);
-        tag.putInt(TIMER_TAG, getTimer(stack) + 1);
-        saveNBTData(stack, TIMER_TAG, tag);
+        saveTimerData(stack, getTimer(stack) + 1);
     }
 
     private void resetTimer(ItemStack stack) {
-        CompoundTag tag = getNBTData(stack, TIMER_TAG);
-        tag.putInt(TIMER_TAG, 0);
-        saveNBTData(stack, TIMER_TAG, tag);
+        saveTimerData(stack, 0);
     }
 
     @Override
@@ -179,25 +172,24 @@ public class PortableBeaconItem extends Item {
         super.appendHoverText(stack, context, list, tooltipFlag);
     }
 
-    public CompoundTag getNBTData(ItemStack stack, String tag) {
+    public CompoundTag getNBTData(ItemStack stack) {
         if (stack.has(PortableComponentData.CUSTOM_NBT)) {
-            CompoundTag internalTag = stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
-            if (internalTag.contains(tag)) {
-                return internalTag.getCompound(tag);
-            }
+            return stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
         }
         return new CompoundTag();
     }
 
-    public void saveNBTData(ItemStack stack, String tagName, CompoundTag tag) {
-        CompoundTag internalTag = stack.has(PortableComponentData.CUSTOM_NBT)
-                ? stack.get(PortableComponentData.CUSTOM_NBT).copyTag()
-                : new CompoundTag();
-
-        internalTag.put(tagName, tag);
-        stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag));
+    public void saveTimerData(ItemStack stack, int timer) {
+        CompoundTag tag = getNBTData(stack);
+        tag.putInt(TIMER_TAG, timer);
+        stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(tag));
     }
 
+    public void saveStatusData(ItemStack stack, boolean status) {
+        CompoundTag tag = getNBTData(stack);
+        tag.putBoolean(ENABLED_TAG, status);
+        stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(tag));
+    }
 
     public enum Tiers {
         IRON(ChatFormatting.WHITE, 1, MobEffects.REGENERATION, MobEffects.MOVEMENT_SPEED),
