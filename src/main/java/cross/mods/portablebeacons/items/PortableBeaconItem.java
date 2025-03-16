@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +29,8 @@ import java.util.List;
 public class PortableBeaconItem extends Item {
 
     protected final Tiers TIER;
+    private final String TIMER_TAG = "timer";
+    private final String ENABLED_TAG = "enabled";
 
     public PortableBeaconItem(Properties properties, Tiers tier) {
         super(properties);
@@ -82,10 +86,10 @@ public class PortableBeaconItem extends Item {
     }
 
     public void toggle(ItemStack stack, Player player) {
-        if (stack.get(PortableComponentData.ENABLED) != null) {
-            stack.set(PortableComponentData.ENABLED, !stack.get(PortableComponentData.ENABLED));
-        } else stack.set(PortableComponentData.ENABLED, true);
-        boolean active = stack.get(PortableComponentData.ENABLED);
+        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
+        tag.putBoolean(ENABLED_TAG, !tag.getBoolean(ENABLED_TAG));
+        saveNBTData(stack, ENABLED_TAG, tag);
+        boolean active = tag.getBoolean(ENABLED_TAG);
         if (active) {
             player.displayClientMessage(Component.translatable("tooltip.portablebeacons.mode", Component.translatable("tooltip.portablebeacons.mode.on").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GOLD), false);
         } else {
@@ -94,11 +98,14 @@ public class PortableBeaconItem extends Item {
     }
 
     private void toggleOn(ItemStack stack) {
-        stack.set(PortableComponentData.ENABLED, true);
+        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
+        tag.putBoolean(ENABLED_TAG, true);
+        saveNBTData(stack, ENABLED_TAG, tag);
     }
 
     private boolean isToggledOn(ItemStack stack) {
-        return stack.getOrDefault(PortableComponentData.ENABLED.get(), false);
+        CompoundTag tag = getNBTData(stack, ENABLED_TAG);
+        return tag.getBoolean(ENABLED_TAG);
     }
 
     private int getRange() {
@@ -114,15 +121,20 @@ public class PortableBeaconItem extends Item {
     }
 
     private int getTimer(ItemStack stack) {
-        return stack.getOrDefault(PortableComponentData.TIMER, 0);
+        CompoundTag tag = getNBTData(stack, TIMER_TAG);
+        return tag.getInt(TIMER_TAG);
     }
 
     private void tickTimer(ItemStack stack) {
-        stack.set(PortableComponentData.TIMER, this.getTimer(stack) + 1);
+        CompoundTag tag = getNBTData(stack, TIMER_TAG);
+        tag.putInt(TIMER_TAG, getTimer(stack) + 1);
+        saveNBTData(stack, TIMER_TAG, tag);
     }
 
     private void resetTimer(ItemStack stack) {
-        stack.set(PortableComponentData.TIMER, 0);
+        CompoundTag tag = getNBTData(stack, TIMER_TAG);
+        tag.putInt(TIMER_TAG, 0);
+        saveNBTData(stack, TIMER_TAG, tag);
     }
 
     @Override
@@ -165,6 +177,28 @@ public class PortableBeaconItem extends Item {
             }
         }
         super.appendHoverText(stack, context, list, tooltipFlag);
+    }
+
+    public CompoundTag getNBTData(ItemStack stack, String tag) {
+        if (stack.has(PortableComponentData.CUSTOM_NBT)) {
+            CompoundTag internalTag = stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
+            if (internalTag.contains(tag)) {
+                return internalTag.getCompound(tag);
+            }
+        }
+        return new CompoundTag();
+    }
+
+    public void saveNBTData(ItemStack stack, String tagName, CompoundTag tag) {
+        if (stack.has(PortableComponentData.CUSTOM_NBT)) {
+            CompoundTag internalTag = stack.get(PortableComponentData.CUSTOM_NBT).copyTag();
+            internalTag.put(tagName, tag);
+            stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag)); // is it right?
+        } else {
+            CompoundTag internalTag = new CompoundTag();
+            internalTag.put(tagName, tag);
+            stack.set(PortableComponentData.CUSTOM_NBT, CustomData.of(internalTag)); // no idea
+        }
     }
 
     public enum Tiers {

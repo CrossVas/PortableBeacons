@@ -4,6 +4,7 @@ import cross.mods.portablebeacons.PortableBeacons;
 import cross.mods.portablebeacons.items.PortableBeaconItem;
 import cross.mods.portablebeacons.items.PortableBeaconShell;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,8 +19,7 @@ public class PortableItems {
 
     public static final Supplier<Item.Properties> COMMON_SUPPLIER = () -> new Item.Properties()
             .stacksTo(1)
-            .component(PortableComponentData.ENABLED.get(), false)
-            .component(PortableComponentData.TIMER.get(), 0);
+            .component(PortableComponentData.CUSTOM_NBT, CustomData.EMPTY);
 
     public static final Supplier<Item.Properties> PROPERTIES_SUPPLIER = () -> COMMON_SUPPLIER.get().fireResistant();
 
