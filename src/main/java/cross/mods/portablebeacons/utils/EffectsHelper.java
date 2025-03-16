@@ -21,7 +21,7 @@ public class EffectsHelper {
     }
 
     public static void applyAura(Player player, PortableBeaconItem.Tiers tier) {
-        Level level = player.level();
+        Level level = player.getLevel();
         int range = PortableBeacons.CONFIG.effectRange.get();
         if (range == 0) return;
         if (!level.isClientSide()) {

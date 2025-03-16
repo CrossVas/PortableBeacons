@@ -1,15 +1,15 @@
 package cross.mods.portablebeacons.utils;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ConfigHandler {
 
-    public final ModConfigSpec.BooleanValue toggleable;
-    public final ModConfigSpec.IntValue effectRange;
-    public final ModConfigSpec.IntValue cost;
-    public final ModConfigSpec.IntValue costTimer;
+    public final ForgeConfigSpec.BooleanValue toggleable;
+    public final ForgeConfigSpec.IntValue effectRange;
+    public final ForgeConfigSpec.IntValue cost;
+    public final ForgeConfigSpec.IntValue costTimer;
 
-    public ConfigHandler(ModConfigSpec.Builder builder) {
+    public ConfigHandler(ForgeConfigSpec.Builder builder) {
         builder.push("common");
         this.toggleable = builder.define("toggleable", true);
         this.effectRange = builder.defineInRange("range", 0, 0, 100);

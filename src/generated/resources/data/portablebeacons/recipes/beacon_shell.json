@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "tag": "forge:glass"
+    },
+    "O": {
+      "tag": "forge:obsidian"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "G G",
+    "OOO"
+  ],
+  "result": {
+    "item": "portablebeacons:beacon_shell"
+  }
+}

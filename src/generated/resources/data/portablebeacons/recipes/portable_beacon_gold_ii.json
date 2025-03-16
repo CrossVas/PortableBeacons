@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "tag": "forge:storage_blocks/lapis"
+  },
+  "base": {
+    "item": "portablebeacons:portable_beacon_gold"
+  },
+  "result": {
+    "item": "portablebeacons:portable_beacon_gold_ii"
+  }
+}

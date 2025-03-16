@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "tag": "forge:storage_blocks/netherite"
+  },
+  "base": {
+    "item": "portablebeacons:portable_beacon_diamond_ii"
+  },
+  "result": {
+    "item": "portablebeacons:portable_beacon_netherite_ii"
+  }
+}

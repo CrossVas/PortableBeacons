@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "S": {
+      "item": "portablebeacons:portable_beacon_emerald_ii"
+    }
+  },
+  "pattern": [
+    " S ",
+    "III"
+  ],
+  "result": {
+    "item": "portablebeacons:portable_beacon_diamond"
+  }
+}

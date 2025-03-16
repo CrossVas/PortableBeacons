@@ -1,12 +1,12 @@
 package cross.mods.portablebeacons.items;
 
 import cross.mods.portablebeacons.PortableBeacons;
-import cross.mods.portablebeacons.init.PortableComponentData;
 import cross.mods.portablebeacons.utils.EffectsHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,6 +28,9 @@ import java.util.List;
 public class PortableBeaconItem extends Item {
 
     protected final Tiers TIER;
+
+    private String TAG_TIMER = "timer";
+    private String TAG_ENABLED = "beacon_enabled";
 
     public PortableBeaconItem(Properties properties, Tiers tier) {
         super(properties);
@@ -82,10 +86,9 @@ public class PortableBeaconItem extends Item {
     }
 
     public void toggle(ItemStack stack, Player player) {
-        if (stack.get(PortableComponentData.ENABLED) != null) {
-            stack.set(PortableComponentData.ENABLED, !stack.get(PortableComponentData.ENABLED));
-        } else stack.set(PortableComponentData.ENABLED, true);
-        boolean active = stack.get(PortableComponentData.ENABLED);
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putBoolean(TAG_ENABLED, !tag.getBoolean(TAG_ENABLED));
+        boolean active = tag.getBoolean(TAG_ENABLED);
         if (active) {
             player.displayClientMessage(Component.translatable("tooltip.portablebeacons.mode", Component.translatable("tooltip.portablebeacons.mode.on").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GOLD), false);
         } else {
@@ -94,11 +97,13 @@ public class PortableBeaconItem extends Item {
     }
 
     private void toggleOn(ItemStack stack) {
-        stack.set(PortableComponentData.ENABLED, true);
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putBoolean(TAG_ENABLED, true);
     }
 
     private boolean isToggledOn(ItemStack stack) {
-        return stack.getOrDefault(PortableComponentData.ENABLED.get(), false);
+        CompoundTag tag = stack.getOrCreateTag();
+        return tag.getBoolean(TAG_ENABLED);
     }
 
     private int getRange() {
@@ -114,15 +119,18 @@ public class PortableBeaconItem extends Item {
     }
 
     private int getTimer(ItemStack stack) {
-        return stack.getOrDefault(PortableComponentData.TIMER, 0);
+        CompoundTag tag = stack.getOrCreateTag();
+        return tag.getInt(TAG_TIMER);
     }
 
     private void tickTimer(ItemStack stack) {
-        stack.set(PortableComponentData.TIMER, this.getTimer(stack) + 1);
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(TAG_TIMER, this.getTimer(stack) + 1);
     }
 
     private void resetTimer(ItemStack stack) {
-        stack.set(PortableComponentData.TIMER, 0);
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(TAG_TIMER, 0);
     }
 
     @Override
@@ -131,7 +139,7 @@ public class PortableBeaconItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
         boolean active = isToggledOn(stack);
         if (Screen.hasShiftDown()) {
             list.add(Component.translatable("tooltip.portablebeacons.desc.main").withStyle(ChatFormatting.YELLOW));
@@ -161,10 +169,10 @@ public class PortableBeaconItem extends Item {
             List<MobEffectInstance> effects = this.TIER.effects();
             for (MobEffectInstance effect : effects) {
                 int level = effect.getAmplifier();
-                list.add(effect.getEffect().value().getDisplayName().copy().append(" ").append(Component.translatable("enchantment.level." + (level + 1))));
+                list.add(effect.getEffect().getDisplayName().copy().append(" ").append(Component.translatable("enchantment.level." + (level + 1))));
             }
         }
-        super.appendHoverText(stack, context, list, tooltipFlag);
+        super.appendHoverText(stack, pLevel, list, pIsAdvanced);
     }
 
     public enum Tiers {
@@ -179,34 +187,34 @@ public class PortableBeaconItem extends Item {
         NETHERITE(ChatFormatting.LIGHT_PURPLE, 1, DIAMOND, MobEffects.FIRE_RESISTANCE, MobEffects.DAMAGE_RESISTANCE),
         NETHERITE_2(2, NETHERITE);
 
-        final List<Holder<MobEffect>> EFFECTS;
+        final List<MobEffect> EFFECTS;
         final int AMPLIFICATION;
         final ChatFormatting STYLE;
         final List<MobEffectInstance> EFFECTS_LIST;
 
-        Tiers(int amplification, Tiers baseTier, Holder<MobEffect>... additionalEffects) {
+        Tiers(int amplification, Tiers baseTier, MobEffect... additionalEffects) {
             this(baseTier.style(), amplification, combineEffects(baseTier.EFFECTS, additionalEffects));
         }
 
-        Tiers(ChatFormatting style, int amplification, Tiers baseTier, Holder<MobEffect>... additionalEffects) {
+        Tiers(ChatFormatting style, int amplification, Tiers baseTier, MobEffect... additionalEffects) {
             this(style, amplification, combineEffects(baseTier.EFFECTS, additionalEffects));
         }
 
-        Tiers(ChatFormatting style, int amplification, Holder<MobEffect>... effects) {
+        Tiers(ChatFormatting style, int amplification, MobEffect... effects) {
             this.EFFECTS = List.of(effects);
             this.AMPLIFICATION = amplification;
             this.STYLE = style;
             this.EFFECTS_LIST = new ObjectArrayList<>();
-            for (Holder<MobEffect> effect : effects) {
+            for (MobEffect effect : effects) {
                 MobEffectInstance instance = new MobEffectInstance(effect, 1, amplification - 1, false, true, true);
                 this.EFFECTS_LIST.add(instance);
             }
         }
 
-        private static Holder<MobEffect>[] combineEffects(List<Holder<MobEffect>> baseEffects, Holder<MobEffect>[] additionalEffects) {
-            LinkedHashSet<Holder<MobEffect>> combined = new LinkedHashSet<>(baseEffects);
+        private static MobEffect[] combineEffects(List<MobEffect> baseEffects, MobEffect[] additionalEffects) {
+            LinkedHashSet<MobEffect> combined = new LinkedHashSet<>(baseEffects);
             combined.addAll(List.of(additionalEffects));
-            return combined.toArray(new Holder[0]);
+            return combined.toArray(new MobEffect[0]);
         }
 
         public int amp() {
