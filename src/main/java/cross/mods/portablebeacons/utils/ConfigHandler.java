@@ -5,11 +5,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ConfigHandler {
 
     public final ModConfigSpec.BooleanValue toggleable;
-
     public final ModConfigSpec.IntValue effectRange;
-
     public final ModConfigSpec.IntValue cost;
-
     public final ModConfigSpec.IntValue costTimer;
 
     public ConfigHandler(ModConfigSpec.Builder builder) {

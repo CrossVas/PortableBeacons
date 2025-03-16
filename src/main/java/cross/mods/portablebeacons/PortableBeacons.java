@@ -23,14 +23,14 @@ public class PortableBeacons {
     public static final ConfigHandler CONFIG;
     public static final ModConfigSpec CONFIG_SPEC;
 
-    public static final CuriosLoader CURIO_LOADER = new CuriosLoader();
-    public static final boolean CURIO = ModList.get().isLoaded("curios");
-
     static {
         final Pair<ConfigHandler, ModConfigSpec> SPEC_PAIR = new ModConfigSpec.Builder().configure(ConfigHandler::new);
         CONFIG = SPEC_PAIR.getLeft();
         CONFIG_SPEC = SPEC_PAIR.getRight();
     }
+
+    public static final CuriosLoader CURIO_LOADER = new CuriosLoader();
+    public static final boolean CURIO = ModList.get().isLoaded("curios");
 
     public PortableBeacons(IEventBus eventBus, ModContainer mod) {
         mod.registerConfig(ModConfig.Type.COMMON, CONFIG_SPEC);
