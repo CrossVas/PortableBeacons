@@ -42,9 +42,13 @@ public class PortableBeaconsTagsProvider extends ItemTagsProvider {
         );
         this.tag(PortableBeaconsTags.CURIO_BEACON).add(
                 PortableItems.PORTABLE_BEACON_IRON.asItem(),
+                PortableItems.PORTABLE_BEACON_IRON_II.asItem(),
                 PortableItems.PORTABLE_BEACON_GOLD.asItem(),
+                PortableItems.PORTABLE_BEACON_GOLD_II.asItem(),
                 PortableItems.PORTABLE_BEACON_EMERALD.asItem(),
+                PortableItems.PORTABLE_BEACON_EMERALD_II.asItem(),
                 PortableItems.PORTABLE_BEACON_DIAMOND.asItem(),
+                PortableItems.PORTABLE_BEACON_DIAMOND_II.asItem(),
                 PortableItems.PORTABLE_BEACON_NETHERITE.asItem()
         );
         this.tag(PortableBeaconsTags.CURIO_RING).addTag(PortableBeaconsTags.CURIO_BEACON);

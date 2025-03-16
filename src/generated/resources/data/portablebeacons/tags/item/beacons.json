@@ -1,9 +1,13 @@
 {
   "values": [
     "portablebeacons:portable_beacon_iron",
+    "portablebeacons:portable_beacon_iron_ii",
     "portablebeacons:portable_beacon_gold",
+    "portablebeacons:portable_beacon_gold_ii",
     "portablebeacons:portable_beacon_emerald",
+    "portablebeacons:portable_beacon_emerald_ii",
     "portablebeacons:portable_beacon_diamond",
+    "portablebeacons:portable_beacon_diamond_ii",
     "portablebeacons:portable_beacon_netherite"
   ]
 }

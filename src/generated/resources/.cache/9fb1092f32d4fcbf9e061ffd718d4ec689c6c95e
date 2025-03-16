@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-16T11:53:54.1686974	Recipes
+// 1.21.1	2025-03-16T12:18:26.1053223	Recipes
 96e28a7b258932b25d75d7a6b0b5a939104e6c5a data/portablebeacons/advancement/recipes/tools/beacon_shell.json
 6a9269a5ab35182dc6c08f8a250be9b74524cb0d data/portablebeacons/advancement/recipes/tools/portable_beacon_diamond.json
 01c7dbdffcf70d16294549e385565031c472a295 data/portablebeacons/advancement/recipes/tools/portable_beacon_diamond_1.json
@@ -23,7 +23,7 @@ f5d5ea65d44881e0c22b65893b17f52dd2561d3b data/portablebeacons/recipe/portable_be
 93ac27319bfdcb1f4d2ca889895a3d925ab1e065 data/portablebeacons/recipe/portable_beacon_gold.json
 24bb1fe035ee513896531f0951979a384e416442 data/portablebeacons/recipe/portable_beacon_gold_1.json
 8dcffee67b441ba07cce1527bc9f38ae6d2ce7b1 data/portablebeacons/recipe/portable_beacon_gold_ii.json
-a2253b396891489be9c742d2fee14e1d608756ef data/portablebeacons/recipe/portable_beacon_iron.json
+94a45f3986d30ab00e162c8507e7b670530da816 data/portablebeacons/recipe/portable_beacon_iron.json
 83374100eff48ddd705fd9fccbe7865f28c5d5e2 data/portablebeacons/recipe/portable_beacon_iron_ii.json
 8f8d8972498b11f496b8bc5acfcdcae6f1d2b7b2 data/portablebeacons/recipe/portable_beacon_netherite.json
 6e8a479d72451578cfd7a35fa1aec0d321449a5f data/portablebeacons/recipe/portable_beacon_netherite_ii.json
