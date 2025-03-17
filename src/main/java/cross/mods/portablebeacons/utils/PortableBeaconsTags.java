@@ -8,6 +8,6 @@ import net.minecraft.world.item.Item;
 
 public class PortableBeaconsTags {
 
-    public static TagKey<Item> CURIO_BEACON = ItemTags.create(new ResourceLocation(PortableBeacons.ID, "beacons"));
-    public static TagKey<Item> CURIO_RING = ItemTags.create(new ResourceLocation("curios", "ring"));
+    public static TagKey<Item> BEACONS = ItemTags.create(new ResourceLocation(PortableBeacons.ID, "beacons"));
+    public static TagKey<Item> CURIO_BEACONS = ItemTags.create(new ResourceLocation("curios", "portablebeacons"));
 }

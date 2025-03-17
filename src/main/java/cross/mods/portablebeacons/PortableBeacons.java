@@ -48,6 +48,8 @@ public class PortableBeacons {
     }
 
     public void commonLoad(FMLCommonSetupEvent e) {
-        if (CURIO) CURIO_LOADER.preInit();
+        if (CURIO) {
+            CuriosLoader.init();
+        }
     }
 }

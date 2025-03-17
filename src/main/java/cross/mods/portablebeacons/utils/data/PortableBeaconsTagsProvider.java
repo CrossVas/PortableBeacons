@@ -18,7 +18,7 @@ public class PortableBeaconsTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        this.tag(PortableBeaconsTags.CURIO_BEACON).add(
+        this.tag(PortableBeaconsTags.BEACONS).add(
                 PortableItems.PORTABLE_BEACON_IRON.get(),
                 PortableItems.PORTABLE_BEACON_IRON_II.get(),
                 PortableItems.PORTABLE_BEACON_GOLD.get(),
@@ -29,6 +29,6 @@ public class PortableBeaconsTagsProvider extends ItemTagsProvider {
                 PortableItems.PORTABLE_BEACON_DIAMOND_II.get(),
                 PortableItems.PORTABLE_BEACON_NETHERITE.get()
         );
-        this.tag(PortableBeaconsTags.CURIO_RING).addTag(PortableBeaconsTags.CURIO_BEACON);
+        this.tag(PortableBeaconsTags.CURIO_BEACONS).addTag(PortableBeaconsTags.BEACONS);
     }
 }
