@@ -59,12 +59,11 @@ public class PortableBeaconItem extends Item {
                 if (this.getTimer(stack) >= this.getMaxTime() && player.totalExperience >= this.getExperienceCost()) {
                     int range = getRange();
                     if (range > 0) {
-                        Utils.applyAura(player, this.TIER);
+                        Utils.applyInRadius(player, this.TIER);
                     } else Utils.applyEffects(player, this.TIER);
                     if (!player.isCreative()) {
                         player.giveExperiencePoints(-this.getExperienceCost());
                     }
-
                     this.resetTimer(stack);
                 } else {
                     this.tickTimer(stack);

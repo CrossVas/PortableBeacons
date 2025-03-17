@@ -9,6 +9,6 @@ import net.minecraft.world.item.Item;
 public class PortableBeaconsTags {
 
     public static TagKey<Item> ARMOR_TRIMS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "armor_trims"));
-    public static TagKey<Item> CURIO_BEACON = ItemTags.create(ResourceLocation.fromNamespaceAndPath(PortableBeacons.ID, "beacons"));
-    public static TagKey<Item> CURIO_RING = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"));
+    public static TagKey<Item> BEACONS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(PortableBeacons.ID, "beacons"));
+    public static TagKey<Item> CURIO_BEACONS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "portablebeacons"));
 }

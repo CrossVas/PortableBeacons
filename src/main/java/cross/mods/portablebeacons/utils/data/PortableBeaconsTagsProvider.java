@@ -40,7 +40,7 @@ public class PortableBeaconsTagsProvider extends ItemTagsProvider {
                 Items.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE,
                 Items.WILD_ARMOR_TRIM_SMITHING_TEMPLATE
         );
-        this.tag(PortableBeaconsTags.CURIO_BEACON).add(
+        this.tag(PortableBeaconsTags.BEACONS).add(
                 PortableItems.PORTABLE_BEACON_IRON.asItem(),
                 PortableItems.PORTABLE_BEACON_IRON_II.asItem(),
                 PortableItems.PORTABLE_BEACON_GOLD.asItem(),
@@ -51,6 +51,6 @@ public class PortableBeaconsTagsProvider extends ItemTagsProvider {
                 PortableItems.PORTABLE_BEACON_DIAMOND_II.asItem(),
                 PortableItems.PORTABLE_BEACON_NETHERITE.asItem()
         );
-        this.tag(PortableBeaconsTags.CURIO_RING).addTag(PortableBeaconsTags.CURIO_BEACON);
+        this.tag(PortableBeaconsTags.CURIO_BEACONS).addTag(PortableBeaconsTags.BEACONS);
     }
 }

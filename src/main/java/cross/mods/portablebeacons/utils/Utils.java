@@ -25,7 +25,7 @@ public class Utils {
         }
     }
 
-    public static void applyAura(Player player, PortableBeaconItem.Tiers tier) {
+    public static void applyInRadius(Player player, PortableBeaconItem.Tiers tier) {
         Level level = player.level();
         int range = PortableBeacons.CONFIG.effectRange.get();
         if (range == 0) return;

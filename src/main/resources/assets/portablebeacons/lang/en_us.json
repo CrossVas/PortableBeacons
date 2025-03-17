@@ -40,5 +40,6 @@
   "tooltip.portablebeacons.sneak_info.desc": "Sneak",
   "tooltip.portablebeacons.provides": "Provides:",
 
-  "tooltip.portablebeacons.shell": "Portable Beacon Base"
+  "tooltip.portablebeacons.shell": "Portable Beacon Base",
+  "curios.identifier.portablebeacons": "Portable Beacons"
 }
