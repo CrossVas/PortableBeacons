@@ -15,17 +15,7 @@ public class PortableBeaconsTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PORTABLE_CREATIVE_TAB = TABS.register("portable_beacons_tab",
             () -> CreativeModeTab.builder().icon(PortableItems.BEACON_SHELL::toStack).title(Component.translatable("itemGroup.portablebeacons"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(PortableItems.BEACON_SHELL.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_IRON.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_IRON_II.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_GOLD.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_GOLD_II.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_EMERALD.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_EMERALD_II.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_DIAMOND.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_DIAMOND_II.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_NETHERITE.get());
-                        output.accept(PortableItems.PORTABLE_BEACON_NETHERITE_II.get());
+                        PortableItems.ITEMS.getEntries().forEach(itemDeferredHolder -> output.accept(itemDeferredHolder.get()));
                     }).build());
 
     public static void register(IEventBus bus) {
