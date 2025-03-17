@@ -3,14 +3,19 @@
   "portablebeacons.configuration.common.tooltip": "Common Settings",
 
   "portablebeacons.configuration.toggleable": "Toggleable",
-  "portablebeacons.configuration.range": "Effect Range",
-  "portablebeacons.configuration.cost": "Cost",
-  "portablebeacons.configuration.x": "X",
-
   "portablebeacons.configuration.toggleable.tooltip": "Portable Beacons can be Toggled ON/OFF when the player uses the beacon in hand.\nIf false the beacon will ALWAYS be active.",
-  "portablebeacons.configuration.x.tooltip": "Apply Cost every X Seconds",
-  "portablebeacons.configuration.costs.tooltip": "Experience Cost to Maintain Buffs.\nSet to 0 for no costs.",
+
+  "portablebeacons.configuration.particles": "Particles",
+  "portablebeacons.configuration.particles.tooltip": "Spawn Effect Particles",
+
+  "portablebeacons.configuration.range": "Effect Range",
   "portablebeacons.configuration.range.tooltip": "Portable Beacons can affect all nearby Players.\nPlayers within the Effect Range will also gain the Portable Beacons Effect.\nIf Effect Range is set to 0 the Beacon will ONLY affect the player using it",
+
+  "portablebeacons.configuration.cost": "Cost",
+  "portablebeacons.configuration.costs.tooltip": "Experience Cost to Maintain Buffs.\nSet to 0 for no costs.",
+
+  "portablebeacons.configuration.x": "X",
+  "portablebeacons.configuration.x.tooltip": "Apply Cost every X Seconds",
 
   "itemGroup.portablebeacons": "Portable Beacons",
   "item.portablebeacons.beacon_shell": "Portable Beacon Case",

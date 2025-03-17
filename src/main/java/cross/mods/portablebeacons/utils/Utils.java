@@ -20,7 +20,7 @@ public class Utils {
     public static void applyEffects(Player player, PortableBeaconItem.Tiers tier) {
         List<MobEffectInstance> effects = tier.effects();
         for (MobEffectInstance effect : effects) {
-            MobEffectInstance freshEffect = new MobEffectInstance(effect.getEffect(), duration, effect.getAmplifier(), false, true, true);
+            MobEffectInstance freshEffect = new MobEffectInstance(effect.getEffect(), duration, effect.getAmplifier(), false, PortableBeacons.CONFIG.particles.get(), true);
             player.addEffect(freshEffect);
         }
     }
