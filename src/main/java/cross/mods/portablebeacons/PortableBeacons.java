@@ -36,7 +36,6 @@ public class PortableBeacons {
         }
     };
 
-    public static final CuriosLoader CURIO_LOADER = new CuriosLoader();
     public static final boolean CURIO = ModList.get().isLoaded("curios");
 
     public PortableBeacons() {
